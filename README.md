@@ -6,7 +6,7 @@ Analizador de seguridad cuántica para TLS/SSL.
 
 ```bash
 # 1. Clonar repositorio
-git clone https://github.com/tuusuario/quantum-tls-analyzer.git
+git clone https://github.com/heanczko311299/quantum-analyzer.git
 cd quantum-analyzer
 
 # 2. Instalar dependencias (usa pipx internamente)
