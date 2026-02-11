@@ -1,4 +1,4 @@
-# Quantum TLS Analyzer
+# Quantum Analyzer
 
 Analizador de seguridad cuántica para TLS/SSL.
 
@@ -6,7 +6,7 @@ Analizador de seguridad cuántica para TLS/SSL.
 
 ```bash
 # 1. Clonar repositorio
-git clone https://github.com/heanczko311299/quantum-analyzer.git
+git clone https://github.com/tuusuario/quantum-tls-analyzer.git
 cd quantum-analyzer
 
 # 2. Instalar dependencias (usa pipx internamente)
@@ -39,11 +39,16 @@ cd quantum-analyzer
 
 ## ✨ **Características**
 
-✅ Detección de algoritmos PQC (Kyber, Dilithium, Falcon, SPHINCS+)  
-✅ Análisis de superficie de ataque cuántico  
-✅ Evaluación de riesgo Store-Now-Decrypt-Later  
+✅ Detección de algoritmos PQC (Kyber, Dilithium, Falcon, SPHINCS+)
+
+✅ Análisis de superficie de ataque cuántico   
+ 
+✅ Evaluación de riesgo Store-Now-Decrypt-Later 
+
 ✅ Reportes en JSON y Markdown  
+
 ✅ Interfaz CLI profesional  
+
 ✅ Resultados detallados con visualización en consola  
 
 ## 📁 **Estructura del Proyecto**
@@ -105,6 +110,55 @@ python -m pipx ensurepath
 
 # Luego intenta de nuevo
 ./quantum.py install
+```
+
+## 📊 **Criterios de Evaluación PQC**
+
+✅ El analizador evalúa los siguientes criterios para calcular el porcentaje de preparación cuántica:
+
+✅ Criterio	Peso	Descripción	Verificación
+TLS 1.3+	20%	Soporte para TLS 1.3 o superior	cryptolyze --tls-versions
+
+✅ PQC KEM detectado	30%	Presencia de KEM poscuánticos (Kyber, SIKE, etc.)	Análisis de suites criptográficas
+
+✅ PQC Firma detectada	25%	Firmas poscuánticas (Dilithium, Falcon, SPHINCS+)	Análisis de certificados y firmas
+
+✅ Forward Secrecy	15%	Perfect Forward Secrecy habilitado	Ephemeral key exchange
+
+✅ SNI habilitado	10%	Server Name Indication soportado	Extensiones TLS
+
+✅ HSTS configurado	+5%	HTTP Strict Transport Security	Header HTTP adicional
+
+
+### **Fórmula de cálculo**
+```text
+
+PQC readiness = Σ(peso × cumplimiento)
+```
+
+Donde cada criterio aporta su peso si se cumple, 0 si no.
+
+Ejemplo con google.com:
+
+    ✅ TLS 1.3: 20%
+
+    ❌ PQC KEM: 0%
+
+    ❌ PQC Firma: 0%
+
+    ✅ Forward Secrecy: 15%
+
+    ✅ SNI: 10%
+
+    ✅ HSTS: +5%
+
+    Total: 50%
+
+### **Visualización en consola**
+```text
+
+PQC readiness: [██████████░░░░░░] 50%
+
 ```
 
 ## 🤝 **Contribuir**
